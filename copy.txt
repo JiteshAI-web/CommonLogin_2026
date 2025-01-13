@@ -1,0 +1,84 @@
+ {/* START WaterBody Form  */}
+
+                {selectedValue == "Water Body" && (
+                  <form>
+                    <div className="waterbodyform">
+                      <div className="d-flex">
+                        <div class="form-floating mb-3 ml-3">
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="floatingInput"
+                            placeholder="Pond Name"
+                            style={{ width: "85%" }}
+                            required
+                            onInvalid={(e) =>
+                              e.target.setCustomValidity("Pond Name ?")
+                            }
+                            onChange={(e) => {
+                              e.target.setCustomValidity("");
+                            }}
+                          />
+                          <label for="floatingInput">Pond Name</label>
+                        </div>
+
+                        <div class="form-floating mb-3 ml-3">
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="floatingInput"
+                            placeholder="District Name"
+                            style={{ width: "85%" }}
+                            required
+                            onInvalid={(e) =>
+                              e.target.setCustomValidity("District name ?")
+                            }
+                            onChange={(e) => {
+                              e.target.setCustomValidity("");
+                            }}
+                          />
+                          <label for="floatingInput">District Name</label>
+                        </div>
+                      </div>
+                      <div className="d-flex justify-content-between ml-3 mr-5">
+                        <div className=" ml-2  " style={{ fontSize: "20px" }}>
+                          No. Of Ponds
+                        </div>
+                        <div>
+                          <button
+                            type="button"
+                            class="btn btn-secondary"
+                            onClick={pondcountdec}
+                          >
+                            -
+                          </button>
+                          <button
+                            type="button"
+                            class="btn btn-info"
+                            style={{ marginLeft: "10px" }}
+                          >
+                            {noofponds}
+                          </button>
+                          <button
+                            type="button"
+                            class="btn btn-secondary"
+                            style={{ marginLeft: "10px" }}
+                            onClick={pondcountinc}
+                          >
+                            +
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="d-flex justify-content-end mt-2">
+                      <button
+                        type="submit"
+                        className=" d-flex justify-content-end btn btn-success px-3 py-2 text-center fs-sm fw-bold rounded-pill mr-2 "
+                      >
+                        Register
+                      </button>
+                    </div>
+                  </form>
+                )}
+
+                {/* END WaterBody Form  */}
