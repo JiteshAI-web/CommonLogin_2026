@@ -21,7 +21,6 @@ const LoginPage = () => {
     // Get values directly from the input fields
     const identifier = e.target.username.value;
     const password = e.target.password.value;
-console.log('hiii')
     try {
       const response = await axios.post(`${process.env.REACT_APP_IP}login/`, {
         identifier,
@@ -36,24 +35,24 @@ console.log('hiii')
       console.log(response.data.category);
 
       if (response.data.category === "master") {
-        const url = `http://aqua1.bc-pl.com/master?category=${response.data.category}&token=${response.data.csrf_token}&mobno=${response.data.Mob}`;
+        const url = `https://aqua1.bc-pl.com/master?category=${response.data.category}&token=${response.data.csrf_token}&mobno=${response.data.Mob}`;
         window.location.href = url;
       }
 
       if (response.data.user_category === "Aquafarming") {
         if (response.data.category === "owner") {
-          const url = `http://aqua1.bc-pl.com/manager?category=${response.data.category}&token=${response.data.csrf_token}&mobno=${response.data.Mob}`;
+          const url = `https://aqua1.bc-pl.com/manager?category=${response.data.category}&token=${response.data.csrf_token}&mobno=${response.data.Mob}`;
           window.location.href = url;
         } else if (response.data.category === "manager") {
-          const url = `http://aqua1.bc-pl.com/manager?category=${response.data.category}&token=${response.data.csrf_token}&mobno=${response.data.Mob}`;
+          const url = `https://aqua1.bc-pl.com/manager?category=${response.data.category}&token=${response.data.csrf_token}&mobno=${response.data.Mob}`;
           window.location.href = url;
         }
       } else if (response.data.user_category === "WaterBody") {
         if (response.data.category === "owner") {
-          const url = `http://localhost:3001/manager?category=${response.data.category}&token=${response.data.csrf_token}&mobno=${response.data.Mob}`;
+          const url = `https://water.bc-pl.com/manager?category=${response.data.category}&token=${response.data.csrf_token}&mobno=${response.data.Mob}`;
           window.location.href = url;
         } else if (response.data.category === "manager") {
-          const url = `http://localhost:3001/manager?category=${response.data.category}&token=${response.data.csrf_token}&mobno=${response.data.Mob}`;
+          const url = `https://water.bc-pl.com/manager?category=${response.data.category}&token=${response.data.csrf_token}&mobno=${response.data.Mob}`;
           window.location.href = url;
         }
       }
