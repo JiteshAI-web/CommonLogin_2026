@@ -26,7 +26,7 @@ const LoginPage = () => {
         identifier,
         password,
       });
-      console.log("login Successful");
+      console.log("login Successfullly");
       // alert("login successful");
       console.log(response.data.message);
       setResponseMessage(response.data.error);
