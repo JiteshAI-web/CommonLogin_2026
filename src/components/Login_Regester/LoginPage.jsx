@@ -214,8 +214,8 @@ const LoginPage = () => {
                   </div>
                   <div
                     onClick={handleClickForgot}
-                    className="bg-blue-600 text-sm text-white p-1 mt-3 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-primary-300 rounded"
-                  >
+                    className="bg-blue-600 text-sm text-white p-2 mt-3 rounded hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-primary-300 hover:cursor-pointer transition-all duration-200 ease-in-out"
+                    >
                     Reset
                   </div>
                 </div>
