@@ -3,11 +3,12 @@ import Layout from "../layout/Layout";
 import logo from "./../../assets/image/logo.png";
 import { useForm } from "react-hook-form";
 import map from "./../../assets/image/Frame.png";
-import { Link, useNavigate, redirect } from "react-router-dom";
 import axios from "axios";
 
 const LoginPage = () => {
   const [responseMessage, setResponseMessage] = useState("");
+  const [email, setEmail] = useState("");
+  const [showForgotPassword, setShowForgotPassword] = useState(false);
   const {
     register,
     handleSubmit,
@@ -62,6 +63,35 @@ const LoginPage = () => {
     }
   };
 
+  const handleClickForgot = async () => {
+    try {
+      if (!email) {
+        setResponseMessage("Please enter your email.");
+        console.log("email not pass");
+        return;
+      }
+      console.log(email);
+
+      const response = await axios.post(
+        `${process.env.REACT_APP_IP}forgotpassword/`,
+        {
+          Email: email,
+        }
+      );
+      console.log(response);
+      if (response.status === 200) {
+        setResponseMessage("Password reset link sent to your email!");
+        setEmail(""); 
+        setShowForgotPassword(!showForgotPassword)
+      } else {
+        setResponseMessage("Failed to send password reset link.");
+      }
+    } catch (error) {
+      console.log("Error:", error);
+      setResponseMessage("An error occurred while sending the reset link.");
+    }
+  };
+
   return (
     <Layout title="common login Page">
       <section
@@ -105,6 +135,7 @@ const LoginPage = () => {
                     id="phone"
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Enter your phone number"
+                    onClick={() => setShowForgotPassword(false)}
                     required
                     {...register("username", {
                       required: true,
@@ -123,6 +154,7 @@ const LoginPage = () => {
                     name="password"
                     id="password"
                     placeholder="••••••••"
+                    onClick={() => setShowForgotPassword(false)}
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     required
                     {...register("password", { required: true })}
@@ -155,17 +187,47 @@ const LoginPage = () => {
                   <button
                     type="button"
                     className="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500"
+                    onClick={() => setShowForgotPassword(!showForgotPassword)}
                   >
-                    Forget Password
+                    Forgot Password
                   </button>
                 </div>
+                {showForgotPassword && (
+                  <div className="flex items-center space-x-4 md:space-x-6">
+                  <div className="flex-1">
+                    <label
+                      htmlFor="email"
+                      className="block text-sm font-medium text-gray-900 dark:text-white"
+                    >
+                      Enter your email to reset password
+                    </label>
+                    <input
+                      type="email"
+                      name="email"
+                      id="email"
+                      placeholder="Enter your email"
+                      className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-md focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      required
+                    />
+                  </div>
+                  <div
+                    onClick={handleClickForgot}
+                    className="bg-blue-600 text-sm text-white p-1 mt-3 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-primary-300 rounded"
+                  >
+                    Reset
+                  </div>
+                </div>
+                
+                )}
                 <button
                   type="submit"
                   className="w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
                 >
                   Sign In
                 </button>
-                <p className="text-sm font-light text-gray-500 dark:text-gray-400">
+                {/* <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                   Don’t have an account yet?{" "}
                   <Link to="/signup">
                     {" "}
@@ -173,7 +235,7 @@ const LoginPage = () => {
                       Register Here
                     </span>{" "}
                   </Link>
-                </p>
+                </p> */}
               </form>
             </div>
           </div>
