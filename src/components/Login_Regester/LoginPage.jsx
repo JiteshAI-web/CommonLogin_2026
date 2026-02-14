@@ -36,16 +36,16 @@ const LoginPage = () => {
       console.log(response.data.category);
 
       if (response.data.category === "master") {
-        const url = `https://aqua1.bc-pl.com/master?category=${response.data.category}&token=${response.data.csrf_token}&mobno=${response.data.Mob}`;
+        const url = `https://newloginbg.bc-pl.com/master?category=${response.data.category}&token=${response.data.csrf_token}&mobno=${response.data.Mob}`;
         window.location.href = url;
       }
 
       if (response.data.user_category === "Aquafarming") {
         if (response.data.category === "owner") {
-          const url = `https://aqua1.bc-pl.com/manager?category=${response.data.category}&token=${response.data.csrf_token}&mobno=${response.data.Mob}`;
+          const url = `https://newloginbg.bc-pl.com/manager?category=${response.data.category}&token=${response.data.csrf_token}&mobno=${response.data.Mob}`;
           window.location.href = url;
         } else if (response.data.category === "manager") {
-          const url = `https://aqua1.bc-pl.com/manager?category=${response.data.category}&token=${response.data.csrf_token}&mobno=${response.data.Mob}`;
+          const url = `https://newloginbg.bc-pl.com/manager?category=${response.data.category}&token=${response.data.csrf_token}&mobno=${response.data.Mob}`;
           window.location.href = url;
         }
       } else if (response.data.user_category === "WaterBody") {
