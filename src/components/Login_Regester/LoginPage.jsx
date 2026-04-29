@@ -20,7 +20,8 @@ const LoginPage = () => {
     e.preventDefault(); // Prevent default form submission
 
     // Get values directly from the input fields
-    const identifier = e.target.username.value;
+    // const identifier = e.target.username.value;
+    const identifier = e.target.phone.value;
     const password = e.target.password.value;
     try {
       const response = await axios.post(`${process.env.REACT_APP_IP}login/`, {
@@ -34,18 +35,19 @@ const LoginPage = () => {
       console.log(response);
       console.log(response.data.Mob);
       console.log(response.data.category);
+      console.log("REACT_APP_IP:", process.env.REACT_APP_IP);
 
       if (response.data.category === "master") {
-        const url = `https://newloginbg.bc-pl.com/master?category=${response.data.category}&token=${response.data.csrf_token}&mobno=${response.data.Mob}`;
+        const url = `http://localhost:3000/master?category=${response.data.category}&token=${response.data.csrf_token}&mobno=${response.data.Mob}`;
         window.location.href = url;
       }
 
       if (response.data.user_category === "Aquafarming") {
         if (response.data.category === "owner") {
-          const url = `https://newloginbg.bc-pl.com/manager?category=${response.data.category}&token=${response.data.csrf_token}&mobno=${response.data.Mob}`;
+          const url = `http://localhost:3000/manager?category=${response.data.category}&token=${response.data.csrf_token}&mobno=${response.data.Mob}`;
           window.location.href = url;
         } else if (response.data.category === "manager") {
-          const url = `https://newloginbg.bc-pl.com/manager?category=${response.data.category}&token=${response.data.csrf_token}&mobno=${response.data.Mob}`;
+          const url = `http://localhost:3000/manager?category=${response.data.category}&token=${response.data.csrf_token}&mobno=${response.data.Mob}`;
           window.location.href = url;
         }
       } else if (response.data.user_category === "WaterBody") {
