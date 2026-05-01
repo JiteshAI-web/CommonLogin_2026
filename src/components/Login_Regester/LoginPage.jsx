@@ -38,16 +38,16 @@ const LoginPage = () => {
       console.log("REACT_APP_IP:", process.env.REACT_APP_IP);
 
       if (response.data.category === "master") {
-        const url = `http://localhost:3000/master?category=${response.data.category}&token=${response.data.csrf_token}&mobno=${response.data.Mob}`;
+        const url = `https://newiot.bc-pl.com/master?category=${response.data.category}&token=${response.data.csrf_token}&mobno=${response.data.Mob}`;
         window.location.href = url;
       }
 
       if (response.data.user_category === "Aquafarming") {
         if (response.data.category === "owner") {
-          const url = `http://localhost:3000/manager?category=${response.data.category}&token=${response.data.csrf_token}&mobno=${response.data.Mob}`;
+          const url = `https://newiot.bc-pl.com/manager?category=${response.data.category}&token=${response.data.csrf_token}&mobno=${response.data.Mob}`;
           window.location.href = url;
         } else if (response.data.category === "manager") {
-          const url = `http://localhost:3000/manager?category=${response.data.category}&token=${response.data.csrf_token}&mobno=${response.data.Mob}`;
+          const url = `https://newiot.bc-pl.com/manager?category=${response.data.category}&token=${response.data.csrf_token}&mobno=${response.data.Mob}`;
           window.location.href = url;
         }
       } else if (response.data.user_category === "WaterBody") {
